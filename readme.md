@@ -1,5 +1,5 @@
 # DateTimeKit Overview
-DateTimeKit is a Swift library that provides simple, easy-to-use date, time and timezone manipulation.  The ideas behind DateTimeKit are quite heavily influenced by the JodaTime library.
+DateTimeKit is a Swift library that provides simple, easy-to-use date, time and timezone manipulation.  The ideas behind DateTimeKit are quite heavily influenced by the [JodaTime](http://www.joda.org/joda-time/) library.
 
 DateTimeKit removes the dependence on `NSDate` and `NSCalendar` and provides a new set of objects in their place. 
 
@@ -112,5 +112,5 @@ Still to come
 # Feedback
 Feel free to ask questions, raise issues or create pull requests. More than happy to receive feedback on new features or how I might have done things better.
 
-I’m contactable via [twitter](http://www.twitter.com/edwardaux) or [email](mailto:craig@blackdogfoundry.com).
+I’m contactable via [twitter](https://twitter.com/edwardaux) or [email](mailto:craig@blackdogfoundry.com).
 
