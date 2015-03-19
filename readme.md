@@ -63,6 +63,36 @@ let dt1 = now + Period(0, 2, 2)
 println(dt1)          // 2015-05-20 16:28:07.845 - Australia/Sydney (GMT+11) offset 39600 (Daylight)
 ```
 
+## Clock
+All of the above examples work just fine, but if you are creating date/time objects representing the “current” time by using the default constructors, then it gets a bit tricky to test because the system clock is obviously continually advancing.
+
+If you need to test your temporal logic, it is often useful to be able to provide an alternate provider of the "current" time. The `Clock` protocol and its various implementations give you the flexibility to provide alternative implementations.
+
+If you don’t provide a clock to the various constructors, then the `SystemClock` implementation will be used, which always returns the current system time.
+
+```
+let clock = SystemClock()
+let now = Instant(clock)     // this is equivalent to calling Instant()
+```
+
+However, sometimes you might want to be able to test code based on a specific date. A `FixedClock` always returns exactly the same instant:
+
+```
+// normal application code would be something like:
+let clock = SystemClock()
+
+// but test case code would something like:
+let someInstant = ...
+let someTimezone = ...
+let clock = FixedClock(someInstant, someTimeZone)
+
+// then by using dependency injection, or passing the clock around in your application code,
+// you can provide sensible behaviour during normal execution and test case execution
+let now = Instant(clock)
+```
+
+Using a `Clock` instance when creating your “current” date/time objects gives you much better testability.
+
 # Installation
 
 ## Copy and Paste
