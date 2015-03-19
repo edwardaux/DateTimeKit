@@ -121,6 +121,8 @@
 		BFD864861ABA2554006C1576 = {
 			isa = PBXGroup;
 			children = (
+				BFD865011ABA2802006C1576 /* license.txt */,
+				BFD865021ABA2802006C1576 /* readme.md */,
 				BFD864921ABA2554006C1576 /* DateTimeKit */,
 				BFD8649F1ABA2554006C1576 /* DateTimeKitTests */,
 				BFD864B41ABA2602006C1576 /* DateTimeKit */,
@@ -155,7 +157,6 @@
 				BFD864D51ABA26C9006C1576 /* Month.swift */,
 				BFD864D71ABA26C9006C1576 /* Year.swift */,
 				BFD864CE1ABA26C9006C1576 /* DateTimeError.swift */,
-				BFD865071ABA2816006C1576 /* License / Readme */,
 				BFD864931ABA2554006C1576 /* Supporting Files */,
 			);
 			path = DateTimeKit;
@@ -224,15 +225,6 @@
 				BFD864C31ABA2602006C1576 /* Info.plist */,
 			);
 			name = "Supporting Files";
-			sourceTree = "<group>";
-		};
-		BFD865071ABA2816006C1576 /* License / Readme */ = {
-			isa = PBXGroup;
-			children = (
-				BFD865011ABA2802006C1576 /* license.txt */,
-				BFD865021ABA2802006C1576 /* readme.md */,
-			);
-			name = "License / Readme";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -665,6 +657,7 @@
 				BFD864A81ABA2554006C1576 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BFD864A91ABA2554006C1576 /* Build configuration list for PBXNativeTarget "DateTimeKitTests" */ = {
 			isa = XCConfigurationList;
@@ -673,6 +666,7 @@
 				BFD864AB1ABA2554006C1576 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		BFD864C61ABA2602006C1576 /* Build configuration list for PBXNativeTarget "DateTimeKit iOS" */ = {
 			isa = XCConfigurationList;
@@ -681,6 +675,7 @@
 				BFD864C81ABA2602006C1576 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
