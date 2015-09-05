@@ -103,8 +103,30 @@ The simplest, but not necessarily best, way to install DateTimeKit is perform th
 * Add `DateTimeKit.framework` to your target’s *Linked Frameworks and Libraries* (be sure to pick the correct iOS or OS X framework depending on what sort of app you are writing)
 * Rebuild your project
 
-## Cocoapods
-Still to come
+### CocoaPods
+
+[CocoaPods](http://cocoapods.org) is a dependency manager for Cocoa projects.
+CocoaPods 0.36 adds supports for Swift and embedded frameworks. You can install it with the following command:
+
+```bash
+$ gem install cocoapods
+```
+
+To integrate DateTimeKit into your Xcode project using CocoaPods, specify it in your `Podfile`:
+
+```ruby
+source 'https://github.com/CocoaPods/Specs.git'
+platform :ios, '8.0'
+use_frameworks!
+
+pod 'DateTimeKit', :git => 'https://github.com/malcommac/DateTimeKit.git'
+```
+
+Then, run the following command:
+
+```bash
+$ pod install
+```
 
 ## Carthage
 Still to come
@@ -114,3 +136,15 @@ Feel free to ask questions, raise issues or create pull requests. More than happ
 
 I’m contactable via [twitter](https://twitter.com/edwardaux) or [email](mailto:craig@blackdogfoundry.com).
 
+# Contributors
+
+* Zacharias J. Beckman [email](mailto:zbeckman@HyraxLLC.com) [fork](https://github.com/zbeckman/DateTimeKit)
+
+### Some other libraries:
+DateTimeKit was also inspired by other works.
+Some links:
+* [JodaTime](http://www.joda.org/joda-time)
+* [SwiftDate](https://github.com/malcommac/SwiftDate)
+* [AFDateHelper](https://github.com/melvitax/AFDateHelper)
+* [Timepiece](https://github.com/naoty/Timepiece)
+* [MSDateFormatter](https://github.com/Namvt/MSDateFormatter)
