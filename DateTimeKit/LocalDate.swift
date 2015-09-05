@@ -24,10 +24,10 @@ public struct LocalDate {
 	Constructs a `LocalDate` using the constituent components. Will fail if any of the input components are out of
 	bounds (eg. more than 13 months)
 	
-	:param: year The year
-	:param: month The month (must be between 1 and 12 inclusive)
-	:param: day The day (must be between 1 and the number of days in the passed month)
-	:param: error An error that will be populated if the initialiser fails
+	- parameter year: The year
+	- parameter month: The month (must be between 1 and 12 inclusive)
+	- parameter day: The day (must be between 1 and the number of days in the passed month)
+	- parameter error: An error that will be populated if the initialiser fails
 	*/
 	public init?(_ year: Int, _ month: Int, _ day: Int, _ error: DateTimeErrorPointer = nil) {
 		if let m = Month(rawValue: month) where day <= m.numberOfDays(year) {
@@ -46,11 +46,11 @@ public struct LocalDate {
 	
 	**Important:** Any time components in the input string will be discarded
 	
-	:param: input The input date string
-	:param: format The NSDateFormatter-compliant date format string
-	:param: zone The zone that will be used when parsing (note that if the input date and format contains timezone info, this parameter will be ignored)
-	:param: locale The locale that will be used when parsing
-	:param: error An error that will be populated if the initialiser fails
+	- parameter input: The input date string
+	- parameter format: The NSDateFormatter-compliant date format string
+	- parameter zone: The zone that will be used when parsing (note that if the input date and format contains timezone info, this parameter will be ignored)
+	- parameter locale: The locale that will be used when parsing
+	- parameter error: An error that will be populated if the initialiser fails
 	*/
 	public init?(input: String, format: String, zone: Zone = Zone.systemDefault(), locale: NSLocale = NSLocale.autoupdatingCurrentLocale(), _ error: DateTimeErrorPointer = nil) {
 		let dateFormatter = NSDateFormatter()
@@ -75,7 +75,7 @@ public struct LocalDate {
 	/**
 	Constructs a `LocalDate` representing the current date in the passed clock
 	
-	:param: clock The clock that will be used to provide the current instant
+	- parameter clock: The clock that will be used to provide the current instant
 	*/
 	public init(_ clock: Clock) {
 		self.init(clock.instant(), clock.zone())
@@ -84,8 +84,8 @@ public struct LocalDate {
 	/**
 	Constructs a `LocalDate` from a given instant within a specifed zone.
 	
-	:param: instant The instant in the datetime continuum
-	:param: zone The zone that is used to determine the wall-clock date
+	- parameter instant: The instant in the datetime continuum
+	- parameter zone: The zone that is used to determine the wall-clock date
 	*/
 	public init(_ instant: Instant, _ zone: Zone) {
 		let zonedDateTime = DateTime(instant, zone)
@@ -104,8 +104,8 @@ public struct LocalDate {
 	
 	Also available by the `+` operator.
 	
-	:param: duration The duration to be added
-	:returns: A new `LocalDate` that represents the new date
+	- parameter duration: The duration to be added
+	- returns: A new `LocalDate` that represents the new date
 	*/
 	public func plus(duration: Duration) -> LocalDate {
 		let zonedDateTime = DateTime(self.year, self.month, self.day, 0, 0, 0, 0, Zone.utc())!
@@ -122,8 +122,8 @@ public struct LocalDate {
 	
 	Also available by the `-` operator.
 	
-	:param: duration The duration to be subtracted
-	:returns: A new `LocalDate` that represents the new date
+	- parameter duration: The duration to be subtracted
+	- returns: A new `LocalDate` that represents the new date
 	*/
 	public func minus(duration: Duration) -> LocalDate {
 		let zonedDateTime = DateTime(self.year, self.month, self.day, 0, 0, 0, 0, Zone.utc())!
@@ -136,8 +136,8 @@ public struct LocalDate {
 	
 	Also available by the `+` operator.
 	
-	:param: period The period to be added
-	:returns: A new `LocalDate` that represents the new date
+	- parameter period: The period to be added
+	- returns: A new `LocalDate` that represents the new date
 	*/
 	public func plus(period: Period) -> LocalDate {
 		// get current date
@@ -145,12 +145,12 @@ public struct LocalDate {
 		let currentNSDate = zonedDateTime.instant().asNSDate()
 		
 		// now add the required values to current date
-		let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+		let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
 		let components = NSDateComponents()
 		components.year = period.years
 		components.month = period.months
 		components.day = period.days
-		let modifiedDate = calendar.dateByAddingComponents(components, toDate: currentNSDate, options: nil)!
+		let modifiedDate = calendar.dateByAddingComponents(components, toDate: currentNSDate, options: [])!
 		
 		// convert back to local date
 		return LocalDate(Instant(modifiedDate), Zone.utc())
@@ -161,8 +161,8 @@ public struct LocalDate {
 	
 	Also available by the `-` operator.
 	
-	:param: period The period to be subtracted
-	:returns: A new `LocalDate` that represents the new date
+	- parameter period: The period to be subtracted
+	- returns: A new `LocalDate` that represents the new date
 	*/
 	public func minus(period: Period) -> LocalDate {
 		// get current date
@@ -170,12 +170,12 @@ public struct LocalDate {
 		let currentNSDate = zonedDateTime.instant().asNSDate()
 		
 		// now add the required values to current date
-		let calendar = NSCalendar(calendarIdentifier: NSGregorianCalendar)!
+		let calendar = NSCalendar(calendarIdentifier: NSCalendarIdentifierGregorian)!
 		let components = NSDateComponents()
 		components.year = -period.years
 		components.month = -period.months
 		components.day = -period.days
-		let modifiedDate = calendar.dateByAddingComponents(components, toDate: currentNSDate, options: nil)!
+		let modifiedDate = calendar.dateByAddingComponents(components, toDate: currentNSDate, options: [])!
 		
 		// convert back to local date
 		return LocalDate(Instant(modifiedDate), Zone.utc())
@@ -184,14 +184,14 @@ public struct LocalDate {
 }
 
 // MARK: - Printable protocol
-extension LocalDate : Printable {
+extension LocalDate : CustomStringConvertible {
 	public var description: String {
 		return String(format: "%d-%02d-%02d", self.year, self.month, self.day)
 	}
 }
 
 // MARK: - DebugPrintable protocol
-extension LocalDate : DebugPrintable {
+extension LocalDate : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return self.description
 	}

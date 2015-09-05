@@ -26,7 +26,7 @@ public struct Zone {
 	/**
 	Constructs a `Zone` using the passed `NSTimeZone` instance
 
-	:param: timezone The timezone to use. Defaults to the system default timezone
+	- parameter timezone: The timezone to use. Defaults to the system default timezone
 	*/
 	public init(_ timezone: NSTimeZone = NSTimeZone.defaultTimeZone()) {
 		// because we're using a passed timezone, we can set the secondsFudge to zero
@@ -46,9 +46,9 @@ public struct Zone {
 	* `XXX/YYY` - An `NSTimeZone` ID. For example, `Europe/Paris` or `Australia/Sydney`
 	* `XXX` - An `NSTimeZone` abbreviation. For example, `EST` or `CDT`
 
-	:param: zoneIdentifier The zone identifier to parse
-	:param: error An error that will be populated if the initialiser fails
-	:returns: A `Zone` object if a timezone is able to be determined using the passed identifier, nil otherwise.
+	- parameter zoneIdentifier: The zone identifier to parse
+	- parameter error: An error that will be populated if the initialiser fails
+	- returns: A `Zone` object if a timezone is able to be determined using the passed identifier, nil otherwise.
 	*/
 	public init?(_ zoneIdentifier: String, _ error: DateTimeErrorPointer = nil) {
 		if let (timezone, secondsFudge) = Zone.convertIdentifierTimeZone(zoneIdentifier, error) {
@@ -81,13 +81,13 @@ public struct Zone {
 	/**
 	Takes a zoneIdentifier and parses it into an NSTimeZone plus an addition number of seconds.
 
-	:param: zoneIdentifier The zone identifier to parse
-	:param: error An error pointer that will be populated in case parsing fails
-	:returns: An optional tuple where the first element is a NSTimeZone and the second element is the additional precision. Returns nil if unable to parse.
+	- parameter zoneIdentifier: The zone identifier to parse
+	- parameter error: An error pointer that will be populated in case parsing fails
+	- returns: An optional tuple where the first element is a NSTimeZone and the second element is the additional precision. Returns nil if unable to parse.
 	*/
 	private static func convertIdentifierTimeZone(zoneIdentifier: String, _ error: DateTimeErrorPointer) -> (NSTimeZone, Int)? {
 		// must be at least one character long
-		if count(zoneIdentifier) == 0 {
+		if zoneIdentifier.characters.count == 0 {
 			if error != nil {
 				error.memory = DateTimeError.MalformedZoneIdentifier("Invalid input: \"\". Zone identifier cannot be blank")
 			}
@@ -109,8 +109,8 @@ public struct Zone {
 		else if firstChar == "+" || firstChar == "-" {
 			// split it up ignoring punctuation. 1st component should be hours, 2nd should be minutes
 			// and 3rd might be seconds
-			var components = split(zoneIdentifier) { $0 == ":" || $0 == "+" || $0 == "-" }
-			let componentCount = count(components)
+			var components = zoneIdentifier.characters.split { ":+-".characters.contains($0) }.map { String($0) }
+			let componentCount = components.count
 			if componentCount != 2 && componentCount != 3 {
 				if error != nil {
 					error.memory = DateTimeError.MalformedZoneIdentifier("Invalid input: \"\(zoneIdentifier)\". Zone identifier format must be one of +yy:mm, -yy:mm, +yy:mm:ss, or -yy:mm:ss")
@@ -124,7 +124,7 @@ public struct Zone {
 				components.append("0")
 			}
 			
-			if let hh = components[0].toInt(), mm = components[1].toInt(), ss = components[2].toInt() {
+			if let hh = Int(components[0]), mm = Int(components[1]), ss = Int(components[2]) {
 				if hh < -18 || hh > 18 {
 					if error != nil {
 						error.memory = DateTimeError.MalformedZoneIdentifier("Invalid input: \"\(hh)\". Zone identifier hours must be between -18 and +18 (inclusive)")
@@ -175,10 +175,10 @@ public struct Zone {
 	`NSTimeZone`'s description, however, if there is additional precision then it will use the 
 	`zoneIdentifier()` output instead.
 	
-	:param: locale The locale with which to output the name of the zone. Defaults to user's current locale.
-	:returns: A description of the zone
+	- parameter locale: The locale with which to output the name of the zone. Defaults to user's current locale.
+	- returns: A description of the zone
 	*/
-	public func displayName(_ locale: NSLocale = NSLocale.autoupdatingCurrentLocale()) -> String {
+	public func displayName(locale: NSLocale = NSLocale.autoupdatingCurrentLocale()) -> String {
 		if self.secondsFudge == 0 {
 			return self.timezone.localizedName(.Standard, locale: locale) ?? "Unknown"
 		}
@@ -199,7 +199,7 @@ public struct Zone {
 	* `+hh:mm:ss`
 	* `-hh:mm:ss`
 
-	:returns: An identifier for this zone
+	- returns: An identifier for this zone
 	*/
 	public func zoneIdentifier() -> String {
 		let secondsFromGMT = self.timezone.secondsFromGMT + self.secondsFudge
@@ -223,14 +223,14 @@ public struct Zone {
 }
 
 // MARK: - Printable protocol
-extension Zone : Printable {
+extension Zone : CustomStringConvertible {
 	public var description: String {
 		return self.timezone.description
 	}
 }
 
 // MARK: - DebugPrintable protocol
-extension Zone : DebugPrintable {
+extension Zone : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return self.description
 	}

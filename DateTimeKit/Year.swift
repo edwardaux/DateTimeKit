@@ -18,7 +18,7 @@ public struct Year {
 	/**
 	Constructs a `Year` from the passed value.
 
-	:param: The year value. Can be negative.
+	- parameter The: year value. Can be negative.
 	*/
 	public init(_ year: Int) {
 		self.year = year
@@ -26,7 +26,7 @@ public struct Year {
 
 	/**
 	Returns whether this year is a leap year
-	:returns: A boolean indicating whether this year is a leap year
+	- returns: A boolean indicating whether this year is a leap year
 	*/
 	public func isLeap() -> Bool {
 		return ((year & 3) == 0) && ((year % 100) != 0 || (year % 400) == 0)
@@ -34,7 +34,7 @@ public struct Year {
 	
 	/**
 	Returns the number of days in this year
-	:returns: The number of days in this year
+	- returns: The number of days in this year
 	*/
 	public func numberOfDays() -> Int {
 		return self.isLeap() ? 366 : 365
@@ -42,14 +42,14 @@ public struct Year {
 }
 
 // MARK: - Printable protocol
-extension Year : Printable {
+extension Year : CustomStringConvertible {
 	public var description: String {
 		return "\(self.year)"
 	}
 }
 
 // MARK: - DebugPrintable protocol
-extension Year : DebugPrintable {
+extension Year : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return self.description
 	}

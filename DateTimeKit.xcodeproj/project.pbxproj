@@ -46,6 +46,7 @@
 		BFD865041ABA280A006C1576 /* license.txt in Resources */ = {isa = PBXBuildFile; fileRef = BFD865011ABA2802006C1576 /* license.txt */; };
 		BFD865051ABA280D006C1576 /* readme.md in Sources */ = {isa = PBXBuildFile; fileRef = BFD865021ABA2802006C1576 /* readme.md */; };
 		BFD865061ABA280E006C1576 /* readme.md in Sources */ = {isa = PBXBuildFile; fileRef = BFD865021ABA2802006C1576 /* readme.md */; };
+		F8B182361B9B7CDE00AABDC9 /* DateTimeKit.podspec in Resources */ = {isa = PBXBuildFile; fileRef = F8B182351B9B7CDE00AABDC9 /* DateTimeKit.podspec */; settings = {ASSET_TAGS = (); }; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -90,6 +91,7 @@
 		BFD864F91ABA2779006C1576 /* TestZone.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TestZone.swift; sourceTree = "<group>"; };
 		BFD865011ABA2802006C1576 /* license.txt */ = {isa = PBXFileReference; lastKnownFileType = text; path = license.txt; sourceTree = "<group>"; };
 		BFD865021ABA2802006C1576 /* readme.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = readme.md; sourceTree = "<group>"; };
+		F8B182351B9B7CDE00AABDC9 /* DateTimeKit.podspec */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = DateTimeKit.podspec; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -121,6 +123,7 @@
 		BFD864861ABA2554006C1576 = {
 			isa = PBXGroup;
 			children = (
+				F8B182351B9B7CDE00AABDC9 /* DateTimeKit.podspec */,
 				BFD865011ABA2802006C1576 /* license.txt */,
 				BFD865021ABA2802006C1576 /* readme.md */,
 				BFD864921ABA2554006C1576 /* DateTimeKit */,
@@ -308,7 +311,9 @@
 		BFD864871ABA2554006C1576 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastUpgradeCheck = 0630;
+				LastSwiftMigration = 0700;
+				LastSwiftUpdateCheck = 0700;
+				LastUpgradeCheck = 0700;
 				ORGANIZATIONNAME = "BlackDog Foundry";
 				TargetAttributes = {
 					BFD8648F1ABA2554006C1576 = {
@@ -346,6 +351,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F8B182361B9B7CDE00AABDC9 /* DateTimeKit.podspec in Resources */,
 				BFD865031ABA2809006C1576 /* license.txt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -456,6 +462,7 @@
 				CURRENT_PROJECT_VERSION = 1;
 				DEBUG_INFORMATION_FORMAT = dwarf;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
 				GCC_DYNAMIC_NO_PIC = NO;
 				GCC_NO_COMMON_BLOCKS = YES;
@@ -532,6 +539,7 @@
 				INFOPLIST_FILE = DateTimeKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bdf.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DateTimeKit;
 				SKIP_INSTALL = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
@@ -551,6 +559,7 @@
 				INFOPLIST_FILE = DateTimeKit/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bdf.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DateTimeKit;
 				SKIP_INSTALL = YES;
 			};
@@ -571,6 +580,7 @@
 				);
 				INFOPLIST_FILE = DateTimeKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bdf.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -587,6 +597,7 @@
 				);
 				INFOPLIST_FILE = DateTimeKitTests/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/../Frameworks @loader_path/../Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bdf.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
 			name = Release;
@@ -609,6 +620,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bdf.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DateTimeKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;
@@ -630,6 +642,7 @@
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.3;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.bdf.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = DateTimeKit;
 				SDKROOT = iphoneos;
 				SKIP_INSTALL = YES;

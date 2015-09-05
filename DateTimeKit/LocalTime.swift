@@ -20,11 +20,11 @@ public struct LocalTime {
 	Constructs a `LocalTime` using the constituent components. Will fail if any of the input components are out of
 	bounds (eg. more than 59 seconds)
 	
-	:param: hour The hour (must be between 0 and 23 inclusive)
-	:param: minute The minute (must be between 0 and 59 inclusive)
-	:param: second The second (must be between 0 and 59 inclusive)
-	:param: millisecond The hour (must be between 0 and 999 inclusive)
-	:param: error An error that will be populated if the initialiser fails
+	- parameter hour: The hour (must be between 0 and 23 inclusive)
+	- parameter minute: The minute (must be between 0 and 59 inclusive)
+	- parameter second: The second (must be between 0 and 59 inclusive)
+	- parameter millisecond: The hour (must be between 0 and 999 inclusive)
+	- parameter error: An error that will be populated if the initialiser fails
 	*/
 	public init?(_ hour: Int, _ minute: Int, _ second: Int = 0, _ millisecond: Int = 0, _ error: DateTimeErrorPointer = nil) {
 		if hour >= 0 && hour <= 23 && minute >= 0 && minute <= 59 && second >= 0 && second <= 59 && millisecond >= 0 && millisecond <= 999 {
@@ -44,11 +44,11 @@ public struct LocalTime {
 	
 	**Important:** Any date components in the input string will be discarded
 	
-	:param: input The input time string
-	:param: format The NSDateFormatter-compliant date format string
-	:param: zone The zone that will be used when parsing (note that if the input date and format contains timezone info, this parameter will be ignored)
-	:param: locale The locale that will be used when parsing
-	:param: error An error that will be populated if the initialiser fails
+	- parameter input: The input time string
+	- parameter format: The NSDateFormatter-compliant date format string
+	- parameter zone: The zone that will be used when parsing (note that if the input date and format contains timezone info, this parameter will be ignored)
+	- parameter locale: The locale that will be used when parsing
+	- parameter error: An error that will be populated if the initialiser fails
 	*/
 	public init?(input: String, format: String, zone: Zone = Zone.systemDefault(), locale: NSLocale = NSLocale.autoupdatingCurrentLocale(), _ error: DateTimeErrorPointer = nil) {
 		let dateFormatter = NSDateFormatter()
@@ -73,7 +73,7 @@ public struct LocalTime {
 	/**
 	Constructs a `LocalTime` representing the current time in the passed clock
 	
-	:param: clock The clock that will be used to provide the current instant
+	- parameter clock: The clock that will be used to provide the current instant
 	*/
 	public init(_ clock: Clock) {
 		self.init(clock.instant(), clock.zone())
@@ -82,8 +82,8 @@ public struct LocalTime {
 	/**
 	Constructs a `LocalTime` from a given instant within a specifed zone.
 	
-	:param: instant The instant in the datetime continuum
-	:param: zone The zone that is used to determine the wall-clock time
+	- parameter instant: The instant in the datetime continuum
+	- parameter zone: The zone that is used to determine the wall-clock time
 	*/
 	public init(_ instant: Instant, _ zone: Zone) {
 		let zonedDateTime = DateTime(instant, zone)
@@ -104,8 +104,8 @@ public struct LocalTime {
 	
 	Also available by the `+` operator.
 	
-	:param: duration The duration to be added
-	:returns: A new `LocalTime` that represents the new time
+	- parameter duration: The duration to be added
+	- returns: A new `LocalTime` that represents the new time
 	*/
 	public func plus(duration: Duration) -> LocalTime {
 		let zonedDateTime = DateTime(2001, 1, 1, self.hour, self.minute, self.second, self.millisecond, Zone.utc())!
@@ -123,8 +123,8 @@ public struct LocalTime {
 	
 	Also available by the `-` operator.
 	
-	:param: duration The duration to be subtracted
-	:returns: A new `LocalTime` that represents the new time
+	- parameter duration: The duration to be subtracted
+	- returns: A new `LocalTime` that represents the new time
 	*/
 	public func minus(duration: Duration) -> LocalTime {
 		let zonedDateTime = DateTime(2001, 1, 1, self.hour, self.minute, self.second, self.millisecond, Zone.utc())!
@@ -134,7 +134,7 @@ public struct LocalTime {
 
 	/**
 	Helper function that returns a local time representing midnight
-	:returns: A new `LocalTime` with a time of `00:00:00.000`
+	- returns: A new `LocalTime` with a time of `00:00:00.000`
 	*/
 	public static func midnight() -> LocalTime {
 		return LocalTime(0, 0, 0, 0)!
@@ -142,7 +142,7 @@ public struct LocalTime {
 }
 
 // MARK: - Printable protocol
-extension LocalTime : Printable {
+extension LocalTime : CustomStringConvertible {
 	public var description: String {
 		if self.millisecond == 0 {
 			return String(format: "%02d:%02d:%02d", self.hour, self.minute, self.second)
@@ -154,7 +154,7 @@ extension LocalTime : Printable {
 }
 
 // MARK: - DebugPrintable protocol
-extension LocalTime : DebugPrintable {
+extension LocalTime : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return self.description
 	}
