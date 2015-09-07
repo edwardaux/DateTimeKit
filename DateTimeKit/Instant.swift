@@ -40,6 +40,15 @@ public struct Instant {
 	}
 	
 	/**
+	Constructs a `Instant` using a specific duration since the reference date.
+	
+	- parameter millisSinceReferenceDate: The specific number of milliseconds since the reference date.
+	*/
+	public init(millisSinceReferenceDate: Double) {
+		self.secondsSinceReferenceDate = millisSinceReferenceDate / 1000
+	}
+	
+	/**
 	Constructs a `Instant` representing the same moment as contained in an `NSDate` object
 	
 	- parameter timestamp: The `NSDate` object that represents the moment
