@@ -54,7 +54,7 @@ class TestZone: XCTestCase {
 
 		var error: DateTimeError? = nil
 		DTAssertNil(Zone("+aa:bb", &error))
-		if let e = error {
+		if let _ = error {
 			switch(error!) {
 			case .MalformedZoneIdentifier(let technicalReason):
 				XCTAssertEqual(technicalReason, "Invalid input: \"+aa:bb\". Zone identifier is not in expected format")

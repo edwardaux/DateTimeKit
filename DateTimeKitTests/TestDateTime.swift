@@ -21,10 +21,8 @@ class TestLocalDate: XCTestCase {
 		DTAssertEqual(LocalDate(input:"2012-12-25", format:"yyyy-MM-dd")!, year: 2012, month: 12, day: 25)
 		DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56", format:"yyyy-MM-dd HH:mm:ss")!, year: 2012, month: 12, day: 25)
 		DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56.789", format:"yyyy-MM-dd HH:mm:ss.SSS")!, year: 2012, month: 12, day: 25)
-		// FIX: EXC_BAD_INS
-		//DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56.789+0:00", format:"yyyy-MM-dd HH:mm:ss.SSSZZZ")!, year: 2012, month: 12, day: 25)
-		// FIX: Assert fail NOT EQUAL
-		//DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56.789+10:00", format:"yyyy-MM-dd HH:mm:ss.SSSZZZ")!, year: 2012, month: 12, day: 25)
+		DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56.789+00:00", format:"yyyy-MM-dd HH:mm:ss.SSSZZZ")!, year: 2012, month: 12, day: 25)
+		DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56.789-01:00", format:"yyyy-MM-dd HH:mm:ss.SSSZZZ")!, year: 2012, month: 12, day: 25)
 
 		DTAssertNil(LocalDate(2000, -5, 10))
 		DTAssertNil(LocalDate(2000, 54, 29))
