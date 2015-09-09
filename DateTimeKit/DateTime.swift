@@ -208,6 +208,72 @@ public struct DateTime {
 	public func minus(period: Period) -> DateTime {
 		return DateTime(LocalDateTime(self.dateTime.date - period, self.dateTime.time), self.zone)
 	}
+	
+	// MARK: - Extensions added re: joda-time API (intermediate changes, more to come)
+	
+	public func withYear(year: Int) -> DateTime {
+		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+			return d
+		} else {
+			return self
+		}
+	}
+	
+	public func withMonth(month: Int) -> DateTime {
+		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+			return d
+		} else {
+			return self
+		}
+	}
+	
+	public func withDay(day: Int) -> DateTime {
+		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+			return d
+		} else {
+			return self
+		}
+	}
+	
+	public func withHour(hour: Int) -> DateTime {
+		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+			return d
+		} else {
+			return self
+		}
+	}
+	
+	public func withMinute(minute: Int) -> DateTime {
+		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+			return d
+		} else {
+			return self
+		}
+	}
+	
+	public func withSecond(second: Int) -> DateTime {
+		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+			return d
+		} else {
+			return self
+		}
+	}
+	
+	public func withMillisecond(millisecond: Int) -> DateTime {
+		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+			return d
+		} else {
+			return self
+		}
+	}
+	
+	public func withZone(zone: Zone) -> DateTime {
+		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+			return d
+		} else {
+			return self
+		}
+	}
 }
 
 // MARK: - Printable protocol
