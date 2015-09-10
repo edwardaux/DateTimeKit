@@ -212,7 +212,7 @@ public struct DateTime {
 	// MARK: - Extensions added re: joda-time API (intermediate changes, more to come)
 	
 	public func withYear(year: Int) -> DateTime {
-		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+		if let d = DateTime(year, self.month, self.day, self.hour, self.minute, self.second, self.millisecond, self.zone, nil) {
 			return d
 		} else {
 			return self
@@ -220,7 +220,7 @@ public struct DateTime {
 	}
 	
 	public func withMonth(month: Int) -> DateTime {
-		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+		if let d = DateTime(self.year, month, self.day, self.hour, self.minute, self.second, self.millisecond, self.zone, nil) {
 			return d
 		} else {
 			return self
@@ -228,7 +228,7 @@ public struct DateTime {
 	}
 	
 	public func withDay(day: Int) -> DateTime {
-		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+		if let d = DateTime(self.year, self.month, day, self.hour, self.minute, self.second, self.millisecond, self.zone, nil) {
 			return d
 		} else {
 			return self
@@ -236,7 +236,7 @@ public struct DateTime {
 	}
 	
 	public func withHour(hour: Int) -> DateTime {
-		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+		if let d = DateTime(self.year, self.month, self.day, hour, self.minute, self.second, self.millisecond, self.zone, nil) {
 			return d
 		} else {
 			return self
@@ -244,7 +244,7 @@ public struct DateTime {
 	}
 	
 	public func withMinute(minute: Int) -> DateTime {
-		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+		if let d = DateTime(self.year, self.month, self.day, self.hour, minute, self.second, self.millisecond, self.zone, nil) {
 			return d
 		} else {
 			return self
@@ -252,7 +252,7 @@ public struct DateTime {
 	}
 	
 	public func withSecond(second: Int) -> DateTime {
-		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+		if let d = DateTime(self.year, self.month, self.day, self.hour, self.minute, second, self.millisecond, self.zone, nil) {
 			return d
 		} else {
 			return self
@@ -260,7 +260,7 @@ public struct DateTime {
 	}
 	
 	public func withMillisecond(millisecond: Int) -> DateTime {
-		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+		if let d = DateTime(self.year, self.month, self.day, self.hour, self.minute, self.second, millisecond, self.zone, nil) {
 			return d
 		} else {
 			return self
@@ -268,7 +268,7 @@ public struct DateTime {
 	}
 	
 	public func withZone(zone: Zone) -> DateTime {
-		if let d = DateTime(year, month, day, hour, minute, second, millisecond, zone, nil) {
+		if let d = DateTime(self.year, self.month, self.day, self.hour, self.minute, self.second, self.millisecond, zone, nil) {
 			return d
 		} else {
 			return self

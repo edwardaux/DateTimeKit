@@ -13,11 +13,10 @@ Pod::Spec.new do |s|
 
   s.homepage     = "https://github.com/edwardaux/DateTimeKit"
   s.license      = { :type => "MIT" }
-  s.authors      = { 'Daniele Margutti' => 'me@danielemargutti.com', 'Zacharias Beckman' => 'zbeckman@HyraxLLC.com' }
+  s.authors      = { 'Daniele Margutti' => 'me@danielemargutti.com', 'Craig Edwards' => 'edwardaux', 'Zacharias Beckman' => 'zbeckman@HyraxLLC.com' }
   s.source       = { :git => "https://github.com/edwardaux/DateTimeKit.git", :tag => '1.0.0' }
   s.source_files = "DateTimeKit", "DateTimeKit/**/*.{swift,h,m}"
   s.requires_arc = true
   s.ios.deployment_target = "8.0"
   s.osx.deployment_target = "10.9"
-# this causes problems? // s.pod_target_xcconfig = { 'ENABLE_BITCODE' => 'NO' }
 end
