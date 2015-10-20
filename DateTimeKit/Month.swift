@@ -19,8 +19,8 @@ public enum Month : Int {
 	Returns the name of the day given a specific locale. For example, for the `January` enum value,
 	the en_AU locale would return "January" and fr_FR would return "janvier"
 	
-	:param: The locale to use. Defaults to user's current locale.
-	:returns: The locale-specific representation of the month's name
+	- parameter The: locale to use. Defaults to user's current locale.
+	- returns: The locale-specific representation of the month's name
 	*/
 	public func displayName(locale: NSLocale = NSLocale.autoupdatingCurrentLocale()) -> String {
 		let formatter = NSDateFormatter()
@@ -34,8 +34,8 @@ public enum Month : Int {
 	/**
 	Adds a number of months to the current month and returns the new month.
 	
-	:param: The number of months to add. May be negative, in which case it will be subtracted
-	:returns: The new month
+	- parameter The: number of months to add. May be negative, in which case it will be subtracted
+	- returns: The new month
 	*/
 	public func plus(months: Int) -> Month {
 		// * Moving forward 3 months is the same as 15 months and 27 months, so we modulo 12
@@ -46,15 +46,15 @@ public enum Month : Int {
 		//   12 to get the new month. However, modulo results in 0-based calcs and because our
 		//   months are 1-based we need to subtract one before doing the modulo, do the modulo,
 		//   and then add it back in. A bit tedious, but there you are.
-		var normalized = months % 12
+		let normalized = months % 12
 		return Month(rawValue: ((self.rawValue + normalized + 12 - 1) % 12) + 1)!
 	}
 	
 	/**
 	Subtracts a number of months from the current month and returns the new month.
 	
-	:param: The number of months to subtract. May be negative, in which case it will be added
-	:returns: The new month
+	- parameter The: number of months to subtract. May be negative, in which case it will be added
+	- returns: The new month
 	*/
 	public func minus(months: Int) -> Month {
 		return plus(-(months % 12))
@@ -62,7 +62,7 @@ public enum Month : Int {
 	
 	/**
 	Returns the number of days in a this month for a given year
-	:returns: The number of days in this month
+	- returns: The number of days in this month
 	*/
 	public func numberOfDays(year: Int) -> Int {
 		switch (self) {
@@ -77,14 +77,14 @@ public enum Month : Int {
 }
 
 // MARK: - Printable protocol
-extension Month : Printable {
+extension Month : CustomStringConvertible {
 	public var description: String {
 		return self.displayName()
 	}
 }
 
 // MARK: - DebugPrintable protocol
-extension Month : DebugPrintable {
+extension Month : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return self.description
 	}

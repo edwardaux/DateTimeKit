@@ -14,8 +14,8 @@ class TestDayOfWeek: XCTestCase {
 	
 	func testDayOfWeekName() {
 		let d = DayOfWeek.Friday
-		XCTAssertEqual(d.displayName(locale: NSLocale(localeIdentifier: "en_AU")), "Friday")
-		XCTAssertEqual(d.displayName(locale: NSLocale(localeIdentifier: "fr_FR")), "samedi")
+		XCTAssertEqual(d.displayName(NSLocale(localeIdentifier: "en_AU")), "Friday")
+		XCTAssertEqual(d.displayName(NSLocale(localeIdentifier: "fr_FR")), "samedi")
 	}
 	
 	func testArithmetic() {

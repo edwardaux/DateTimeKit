@@ -37,8 +37,8 @@ public struct Period {
 	
 	Also available by the `+` operator.
 	
-	:param: period The period to be added
-	:returns: A new period that represents the addition of the two periods
+	- parameter period: The period to be added
+	- returns: A new period that represents the addition of the two periods
 	*/
 	public func plus(period: Period) -> Period {
 		return Period(self.years + period.years, self.months + period.months, self.days + period.days)
@@ -49,8 +49,8 @@ public struct Period {
 	
 	Also available by the `-` operator.
 	
-	:param: period The period to be subtracted
-	:returns: A new period that represents the subtraction of the two periods
+	- parameter period: The period to be subtracted
+	- returns: A new period that represents the subtraction of the two periods
 	*/
 	public func minus(period: Period) -> Period {
 		return Period(self.years - period.years, self.months - period.months, self.days - period.days)
@@ -58,7 +58,7 @@ public struct Period {
 }
 
 // MARK: - Printable protocol
-extension Period : Printable {
+extension Period : CustomStringConvertible {
 	public var description: String {
 		if self == Period(0,0,0) {
 			return "empty period"
@@ -76,7 +76,7 @@ extension Period : Printable {
 			let noun = self.pluralise("day", self.days)
 			components.append("\(self.days) \(noun)")
 		}
-		return ", ".join(components)
+		return components.joinWithSeparator(", ")
 	}
 	func pluralise(base: String, _ i: Int) -> String {
 		return i == 1 || i == -1 ? base : base+"s"
@@ -84,7 +84,7 @@ extension Period : Printable {
 }
 
 // MARK: - DebugPrintable protocol
-extension Period : DebugPrintable {
+extension Period : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return self.description
 	}

@@ -33,16 +33,25 @@ public struct Instant {
 	/**
 	Constructs a `Instant` using a specific duration since the reference date.
 	
-	:param: secondsSinceReferenceDate The specific number of seconds since the reference date.
+	- parameter secondsSinceReferenceDate: The specific number of seconds since the reference date.
 	*/
 	public init(_ secondsSinceReferenceDate: Double) {
 		self.secondsSinceReferenceDate = secondsSinceReferenceDate
 	}
 	
 	/**
+	Constructs a `Instant` using a specific duration since the reference date.
+	
+	- parameter millisSinceReferenceDate: The specific number of milliseconds since the reference date.
+	*/
+	public init(millisSinceReferenceDate: Double) {
+		self.secondsSinceReferenceDate = millisSinceReferenceDate / 1000
+	}
+	
+	/**
 	Constructs a `Instant` representing the same moment as contained in an `NSDate` object
 	
-	:param: timestamp The `NSDate` object that represents the moment
+	- parameter timestamp: The `NSDate` object that represents the moment
 	*/
 	public init(_ timestamp: NSDate) {
 		self.init(timestamp.timeIntervalSinceReferenceDate)
@@ -57,8 +66,8 @@ public struct Instant {
 	
 	Also available by the `-` operator.
 	
-	:param: other The instant to be subtracted
-	:returns: A duration representing the difference between the two instants
+	- parameter other: The instant to be subtracted
+	- returns: A duration representing the difference between the two instants
 	*/
 	public func minus(other: Instant) -> Duration {
 		return Duration(self.secondsSinceReferenceDate - other.secondsSinceReferenceDate)
@@ -71,8 +80,8 @@ public struct Instant {
 
 	Also available by the `+` operator.
 	
-	:param: duration The duration to be added
-	:returns: A new instant that represents the new moment in the datetime continuum
+	- parameter duration: The duration to be added
+	- returns: A new instant that represents the new moment in the datetime continuum
 	*/
 	public func plus(duration: Duration) -> Instant {
 		return Instant(self.secondsSinceReferenceDate + duration.seconds)
@@ -85,8 +94,8 @@ public struct Instant {
 	
 	Also available by the `-` operator.
 	
-	:param: duration The duration to be subtracted
-	:returns: A new instant that represents the new moment in the datetime continuum
+	- parameter duration: The duration to be subtracted
+	- returns: A new instant that represents the new moment in the datetime continuum
 	*/
 	public func minus(duration: Duration) -> Instant {
 		return Instant(self.secondsSinceReferenceDate - duration.seconds)
@@ -102,23 +111,23 @@ public struct Instant {
 	/**
 	Helper function that returns an `Instant` object that represents the current time.
 	
-	:param: clock The clock to ask for the current instant
-	:returns: A `Instant` representing the current time
+	- parameter clock: The clock to ask for the current instant
+	- returns: A `Instant` representing the current time
 	*/
-	public static func now(_ clock: Clock = SystemClock()) -> Instant {
+	public static func now(clock: Clock = SystemClock()) -> Instant {
 		return Instant()
 	}
 }
 
 // MARK: - Printable protocol
-extension Instant : Printable {
+extension Instant : CustomStringConvertible {
 	public var description: String {
 		return "\(self.asNSDate())"
 	}
 }
 
 // MARK: - DebugPrintable protocol
-extension Instant : DebugPrintable {
+extension Instant : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return self.description
 	}

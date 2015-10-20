@@ -40,7 +40,7 @@ public struct Duration {
 	/**
 	Constructs a `Duration` of a specified length
 	
-	:param: seconds The length of the duration. Can be negative or positive.
+	- parameter seconds: The length of the duration. Can be negative or positive.
 	*/
 	public init(_ seconds: Double) {
 		self.seconds = seconds
@@ -49,7 +49,7 @@ public struct Duration {
 	/**
 	Constructs a `Duration` of a specified length
 	
-	:param: seconds The length of the duration. Can be negative or positive.
+	- parameter seconds: The length of the duration. Can be negative or positive.
 	*/
 	public init(_ seconds: Int) {
 		self.init(Double(seconds))
@@ -58,8 +58,8 @@ public struct Duration {
 	/**
 	Constructs a `Duration` that represents the difference between two instants.
 
-	:param: startInstant The starting instant
-	:param: endInstant The ending instant
+	- parameter startInstant: The starting instant
+	- parameter endInstant: The ending instant
 	*/
 	public init(_ startInstant: Instant, _ endInstant: Instant) {
 		self.init(endInstant.minus(startInstant).seconds)
@@ -72,8 +72,8 @@ public struct Duration {
 	
 	Also available by the `+` operator.
 	
-	:param: duration The duration to be added
-	:returns: A new duration that includes the passed duration
+	- parameter duration: The duration to be added
+	- returns: A new duration that includes the passed duration
 	*/
 	public func plus(duration: Duration) -> Duration {
 		return Duration(self.seconds + duration.seconds)
@@ -86,8 +86,8 @@ public struct Duration {
 	
 	Also available by the `+` operator.
 	
-	:param: duration The duration to be subtracted
-	:returns: A new duration that includes the passed duration
+	- parameter duration: The duration to be subtracted
+	- returns: A new duration that includes the passed duration
 	*/
 	public func minus(duration: Duration) -> Duration {
 		return Duration(self.seconds - duration.seconds)
@@ -95,14 +95,14 @@ public struct Duration {
 }
 
 // MARK: - Printable protocol
-extension Duration : Printable {
+extension Duration : CustomStringConvertible {
 	public var description: String {
 		return "\(self.seconds) seconds"
 	}
 }
 
 // MARK: - DebugPrintable protocol
-extension Duration : DebugPrintable {
+extension Duration : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return self.description
 	}

@@ -43,7 +43,7 @@ public struct SystemClock : Clock {
 	/**
 	Constructs a new `SystemClock` using a particular timezone
 
-	:param: zone The timezone that will be used. Defaults to the current user's timezone if not specified
+	- parameter zone: The timezone that will be used. Defaults to the current user's timezone if not specified
 	*/
 	public init(_ zone: Zone = Zone()) {
 		self.internalZone = zone
@@ -69,7 +69,7 @@ public struct FixedClock : Clock {
 	/**
 	Constructs a new `FixedClock` using a particular timezone
 	
-	:param: zone The timezone that will be used.
+	- parameter zone: The timezone that will be used.
 	*/
 	public init(_ instant: Instant, _ zone: Zone) {
 		self.internalInstant = instant
@@ -85,24 +85,24 @@ public struct FixedClock : Clock {
 }
 
 // MARK: - Printable protocol
-extension SystemClock : Printable {
+extension SystemClock : CustomStringConvertible {
 	public var description: String {
 		return "\(self.internalZone)"
 	}
 }
-extension FixedClock : Printable {
+extension FixedClock : CustomStringConvertible {
 	public var description: String {
 		return "\(self.internalZone) \(self.internalInstant)"
 	}
 }
 
 // MARK: - DebugPrintable protocol
-extension SystemClock : DebugPrintable {
+extension SystemClock : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return self.description
 	}
 }
-extension FixedClock : DebugPrintable {
+extension FixedClock : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return self.description
 	}

@@ -25,15 +25,15 @@ public struct LocalDateTime {
 	Constructs a `DateTime` using the constituent components. Will fail if any of the input components are out of
 	bounds (eg. more than 59 seconds)
 	
-	:param: year The year
-	:param: month The month (must be between 1 and 12 inclusive)
-	:param: day The day (must be between 1 and the number of days in the passed month)
-	:param: hour The hour (must be between 0 and 23 inclusive)
-	:param: minute The minute (must be between 0 and 59 inclusive)
-	:param: second The second (must be between 0 and 59 inclusive)
-	:param: millisecond The hour (must be between 0 and 999 inclusive)
-	:param: zone The zone that this date/time is in
-	:param: error An error that will be populated if the initialiser fails
+	- parameter year: The year
+	- parameter month: The month (must be between 1 and 12 inclusive)
+	- parameter day: The day (must be between 1 and the number of days in the passed month)
+	- parameter hour: The hour (must be between 0 and 23 inclusive)
+	- parameter minute: The minute (must be between 0 and 59 inclusive)
+	- parameter second: The second (must be between 0 and 59 inclusive)
+	- parameter millisecond: The hour (must be between 0 and 999 inclusive)
+	- parameter zone: The zone that this date/time is in
+	- parameter error: An error that will be populated if the initialiser fails
 	*/
 	public init?(_ year: Int, _ month: Int, _ day: Int, _ hour: Int, _ minute: Int, _ second: Int, _ millisecond: Int = 0, _ error: DateTimeErrorPointer = nil) {
 		if let date = LocalDate(year, month, day, error), time = LocalTime(hour, minute, second, millisecond, error) {
@@ -48,11 +48,11 @@ public struct LocalDateTime {
 	Constructs a `LocalDateTime` from an input string and a date format (ie. something that NSDateFormatter can parse).
 	Optionally, a time zone and locale can be passed and will be used to assist parsing.
 	
-	:param: input The input date string
-	:param: format The NSDateFormatter-compliant date format string
-	:param: zone The zone that will be used when parsing (note that if the input date and format contains timezone info, this parameter will be ignored)
-	:param: locale The locale that will be used when parsing
-	:param: error An error that will be populated if the initialiser fails
+	- parameter input: The input date string
+	- parameter format: The NSDateFormatter-compliant date format string
+	- parameter zone: The zone that will be used when parsing (note that if the input date and format contains timezone info, this parameter will be ignored)
+	- parameter locale: The locale that will be used when parsing
+	- parameter error: An error that will be populated if the initialiser fails
 	*/
 	public init?(input: String, format: String, zone: Zone = Zone.systemDefault(), locale: NSLocale = NSLocale.autoupdatingCurrentLocale(), _ error: DateTimeErrorPointer = nil) {
 		let dateFormatter = NSDateFormatter()
@@ -77,7 +77,7 @@ public struct LocalDateTime {
 	/**
 	Constructs a `LocalDateTime` representing the current moment in time using the passed clock
 	
-	:param: clock The clock that will be used to provide the current instant
+	- parameter clock: The clock that will be used to provide the current instant
 	*/
 	public init(_ clock: Clock) {
 		self.init(LocalDate(clock), LocalTime(clock))
@@ -86,8 +86,8 @@ public struct LocalDateTime {
 	/**
 	Constructs a `LocalDateTime` using the passed `LocalDate` and `LocalTime` components
 
-	:param: date The local date
-	:param: time The local time
+	- parameter date: The local date
+	- parameter time: The local time
 	*/
 	public init(_ date: LocalDate, _ time: LocalTime) {
 		self.date = date
@@ -101,8 +101,8 @@ public struct LocalDateTime {
 	
 	Also available by the `+` operator.
 	
-	:param: duration The duration to be added
-	:returns: A new `LocalDateTime` that represents the new local time
+	- parameter duration: The duration to be added
+	- returns: A new `LocalDateTime` that represents the new local time
 	*/
 	public func plus(duration: Duration) -> LocalDateTime {
 		let zonedDateTime = DateTime(self.year, self.month, self.day, self.hour, self.minute, self.second, self.millisecond, Zone.utc())!
@@ -118,8 +118,8 @@ public struct LocalDateTime {
 	
 	Also available by the `-` operator.
 	
-	:param: duration The duration to be subtracted
-	:returns: A new `LocalDateTime` that represents the new local time
+	- parameter duration: The duration to be subtracted
+	- returns: A new `LocalDateTime` that represents the new local time
 	*/
 	public func minus(duration: Duration) -> LocalDateTime {
 		let zonedDateTime = DateTime(self.year, self.month, self.day, self.hour, self.minute, self.second, self.millisecond, Zone.utc())!
@@ -130,14 +130,14 @@ public struct LocalDateTime {
 }
 
 // MARK: - Printable protocol
-extension LocalDateTime : Printable {
+extension LocalDateTime : CustomStringConvertible {
 	public var description: String {
 		return "\(date.description) \(time.description)"
 	}
 }
 
 // MARK: - DebugPrintable protocol
-extension LocalDateTime : DebugPrintable {
+extension LocalDateTime : CustomDebugStringConvertible {
 	public var debugDescription: String {
 		return self.description
 	}

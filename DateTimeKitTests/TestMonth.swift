@@ -14,8 +14,8 @@ class TestMonth: XCTestCase {
 	
 	func testMonthName() {
 		let m = Month.January
-		XCTAssertEqual(m.displayName(locale: NSLocale(localeIdentifier: "en_AU")), "January")
-		XCTAssertEqual(m.displayName(locale: NSLocale(localeIdentifier: "fr_FR")), "janvier")
+		XCTAssertEqual(m.displayName(NSLocale(localeIdentifier: "en_AU")), "January")
+		XCTAssertEqual(m.displayName(NSLocale(localeIdentifier: "fr_FR")), "janvier")
 	}
 
 	func testArithmetic() {
