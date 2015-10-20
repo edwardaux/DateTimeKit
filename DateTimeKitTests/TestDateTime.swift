@@ -21,8 +21,19 @@ class TestLocalDate: XCTestCase {
 		DTAssertEqual(LocalDate(input:"2012-12-25", format:"yyyy-MM-dd")!, year: 2012, month: 12, day: 25)
 		DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56", format:"yyyy-MM-dd HH:mm:ss")!, year: 2012, month: 12, day: 25)
 		DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56.789", format:"yyyy-MM-dd HH:mm:ss.SSS")!, year: 2012, month: 12, day: 25)
-		DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56.789+00:00", format:"yyyy-MM-dd HH:mm:ss.SSSZZZ")!, year: 2012, month: 12, day: 25)
-		DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56.789-01:00", format:"yyyy-MM-dd HH:mm:ss.SSSZZZ")!, year: 2012, month: 12, day: 25)
+		
+		// Generally speaking, a LocalDate doesn't care about a timezone. however, when
+		// the input has a timezone component, then ultimately the input will resolve to
+		// an instant in time. By default, LocalDate.init() will use the current zone to
+		// determine which "local" date should be used, however, this unit test could be
+		// run by users in different timezones, so we need to be a bit more prescriptive.
+		// So, in this example, Sydney (GMT+10) is in DST, so it is actually GMT+11. Just
+		// after lunch time (12:34:56) in London will be almost midnight (23:34:56)
+		// in Sydney, so the day will still be the 25th. However, just after lunch in
+		// Cape Verde will actually be 00:34:56 in Sydney, so the day will be the 26th.
+		let sydneyZone = Zone(NSTimeZone(name:"Australia/Sydney")!)
+		DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56.789+00:00", format:"yyyy-MM-dd HH:mm:ss.SSSZZZ", zone:sydneyZone)!, year: 2012, month: 12, day: 25)
+		DTAssertEqual(LocalDate(input:"2012-12-25 12:34:56.789-01:00", format:"yyyy-MM-dd HH:mm:ss.SSSZZZ", zone:sydneyZone)!, year: 2012, month: 12, day: 26)
 
 		DTAssertNil(LocalDate(2000, -5, 10))
 		DTAssertNil(LocalDate(2000, 54, 29))
