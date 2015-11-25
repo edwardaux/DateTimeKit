@@ -119,7 +119,7 @@ source 'https://github.com/CocoaPods/Specs.git'
 platform :ios, '8.0'
 use_frameworks!
 
-pod 'DateTimeKit', :git => 'https://github.com/malcommac/DateTimeKit.git'
+pod 'DateTimeKit', :git => 'https://github.com/edwardaux/DateTimeKit.git'
 ```
 
 Then, run the following command:
